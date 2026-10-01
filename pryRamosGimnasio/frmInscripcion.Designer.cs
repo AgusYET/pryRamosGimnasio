@@ -42,7 +42,7 @@
             rdbTarjeta = new RadioButton();
             txtEdad = new TextBox();
             chbCasillero = new CheckBox();
-            cboCuentas = new ComboBox();
+            cboCuotas = new ComboBox();
             grbFormaDePago = new GroupBox();
             chkEstudiante = new CheckBox();
             btnCalcular = new Button();
@@ -178,6 +178,7 @@
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(38, 23);
             txtEdad.TabIndex = 2;
+            txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // chbCasillero
             // 
@@ -190,19 +191,19 @@
             chbCasillero.Text = "Casillero";
             chbCasillero.UseVisualStyleBackColor = true;
             // 
-            // cboCuentas
+            // cboCuotas
             // 
-            cboCuentas.Enabled = false;
-            cboCuentas.FormattingEnabled = true;
-            cboCuentas.Location = new Point(160, 52);
-            cboCuentas.Name = "cboCuentas";
-            cboCuentas.Size = new Size(121, 23);
-            cboCuentas.TabIndex = 2;
+            cboCuotas.Enabled = false;
+            cboCuotas.FormattingEnabled = true;
+            cboCuotas.Location = new Point(160, 52);
+            cboCuotas.Name = "cboCuotas";
+            cboCuotas.Size = new Size(121, 23);
+            cboCuotas.TabIndex = 2;
             // 
             // grbFormaDePago
             // 
             grbFormaDePago.Controls.Add(rdbTarjeta);
-            grbFormaDePago.Controls.Add(cboCuentas);
+            grbFormaDePago.Controls.Add(cboCuotas);
             grbFormaDePago.Controls.Add(rdbEfectivo);
             grbFormaDePago.Location = new Point(203, 298);
             grbFormaDePago.Name = "grbFormaDePago";
@@ -240,6 +241,7 @@
             btnLimpiar.TabIndex = 11;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // txtMeses
             // 
@@ -248,9 +250,11 @@
             txtMeses.Name = "txtMeses";
             txtMeses.Size = new Size(100, 23);
             txtMeses.TabIndex = 6;
+            txtMeses.KeyPress += txtMeses_KeyPress;
             // 
             // frmInscripcion
             // 
+            AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(542, 495);
@@ -276,6 +280,7 @@
             Name = "frmInscripcion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gimnasio Siglo--Inscripcion";
+            Load += frmInscripcion_Load;
             grbFormaDePago.ResumeLayout(false);
             grbFormaDePago.PerformLayout();
             ResumeLayout(false);
@@ -298,7 +303,7 @@
         private RadioButton rdbTarjeta;
         private TextBox txtEdad;
         private CheckBox chbCasillero;
-        private ComboBox cboCuentas;
+        private ComboBox cboCuotas;
         private GroupBox grbFormaDePago;
         private CheckBox chkEstudiante;
         private Button btnCalcular;
