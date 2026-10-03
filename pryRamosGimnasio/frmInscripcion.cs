@@ -64,6 +64,13 @@ namespace pryRamosGimnasio
             EstadoInicial();
         }
 
-       
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+            string nombre;
+            int edad, meses, pago;
+            decimal precioPlan;
+            decimal precioTurno;
+
+        }
     }
 }
