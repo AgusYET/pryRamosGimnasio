@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace pryRamosGimnasio
 {
     public partial class frmInscripcion : Form
@@ -135,9 +137,72 @@ namespace pryRamosGimnasio
 
             if (Edad < 18)
             {
+                edad = "Menor de edad";
+                if (Edad <= 14)
+                {
+                    MessageBox.Show("No se permite la inscripción de menores de 14 años.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cboPlan.Enabled = false;
+                    txtEdad.Clear();
+                    txtEdad.Focus();
+                }
+                else
+                {
+                    if (Edad >= 65)
+                    {
+                        edad = "Adulto mayor";
+                    }
 
-            
+                }
+
             }
+
+            if (rdbEfectivo.Checked)
+            {
+                pago = "Efectivo";
+            }
+            else 
+            {
+               int cuotas = int.Parse(cboCuotas.Text);
+                if (cuotas == 1)
+                {
+                    pago = "Efectivo";
+                }
+                else if (cuotas == 3)
+                {
+                    pago = "Tarjeta - 3 cuotas";
+                }
+                else if (cuotas == 6)
+                {
+                    pago = "Tarjeta - 6 cuotas";
+                }
+            }
+
+            string categoria = (Edad < 18) ? "Menor de edad" : (Edad >= 65) ? "Adulto mayor" : "Adulto";
+
+            string textoPago = (rdbEfectivo.Checked) ? "Efectivo" : (cboCuotas.SelectedIndex != -1) ? $"Tarjeta - {cboCuotas.SelectedItem} cuotas" : "Tarjeta";
+
+            Socio socio;
+            socio.Nombre = nombre;
+            socio.Edad = Edad;
+            socio.Turno = turno;
+            socio.Plan = plan;
+            socio.Meses = Meses;
+            socio.Pago = textoPago;
+            socio.Casillero = casillero;
+            socio.Estudiante = estudiante;
+
+            string mensaje = "Nombre: " + socio.Nombre + "\n" +
+                             "Edad: " + socio.Edad + "\n" +
+                             "Categoría: " + categoria + "\n" +
+                             "Turno: " + socio.Turno + "\n" +
+                             "Plan: " + socio.Plan + "\n" +
+                             "Meses: " + socio.Meses + "\n" +
+                             "Pago: " + socio.Pago + "\n" +
+                             "Casillero: " + (socio.Casillero ? "Sí" : "No") + "\n" +
+                             "Estudiante: " + (socio.Estudiante ? "Sí" : "No");
+
+            MessageBox.Show(mensaje, "Datos del Socio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            EstadoInicial();
 
         }
 
@@ -153,5 +218,32 @@ namespace pryRamosGimnasio
             }
 
         }
+
+        private void rbdTarjeta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbTarjeta.Checked)
+            {
+                cboCuotas.Enabled = true;
+                cboCuotas.SelectedIndex = 0;
+            }
+            else
+            {
+                cboCuotas.Enabled = false;
+                cboCuotas.SelectedIndex = -1;
+            }
+        }
     }
+
+    public struct Socio
+    {
+        public string Nombre;
+        public int Edad;
+        public string Turno;
+        public string Plan;
+        public int Meses;
+        public string Pago;
+        public bool Casillero;
+        public bool Estudiante;
+    }
+
 }
