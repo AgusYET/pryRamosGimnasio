@@ -13,8 +13,29 @@ namespace pryRamosGimnasio
         const decimal DESCUENTO_MENOR_EDAD = 0.25m;
         const decimal RECARGO_TARJETA = 0.10m;
         const decimal RECARGO_CASILLERO = 0.05m;
-        
         int Edad, Meses;
+
+        public struct Socio
+        {
+            public string Nombre;
+            public int Edad;
+            public string Turno;
+            public string Plan;
+            public int Meses;
+            public string Pago;
+            public bool Casillero;
+            public bool Estudiante;
+            public decimal total;
+        }
+
+        //DECLARACION DE ARRAYS
+        //string[] arrayCliente;
+        //1 DIMENSION - VECTOR
+        string[] arrayCliente = new string[3];
+        //INDICE PARA EL ARRAY DE REGISTROS
+        int indiceRegistro = 0;
+
+
         public frmInscripcion()
         {
             InitializeComponent();
@@ -110,6 +131,13 @@ namespace pryRamosGimnasio
             Edad = int.Parse(edad);
             Meses = int.Parse(meses);
             int costoPlan = 0;
+
+            decimal precioMensual = costoPlan;
+            if (casillero) precioMensual += 3000;
+            {
+               decimal subTotal = precioMensual * Meses;
+            }
+
             switch (plan)
             {
                 case "Musculación":
@@ -156,13 +184,34 @@ namespace pryRamosGimnasio
 
             }
 
+            decimal porcentajeDescuento;
+            if (Edad < 18)
+            {
+                porcentajeDescuento = 0.25m; 
+            }
+            else if (Edad >= 65)
+            {
+                porcentajeDescuento = 0.30m;
+            }
+            else if (estudiante)
+            {
+                porcentajeDescuento = 0.15m;
+            }
+            else
+            {
+                porcentajeDescuento = 0.0m;
+            }
+            
+
+            
+
             if (rdbEfectivo.Checked)
             {
                 pago = "Efectivo";
             }
-            else 
+            else
             {
-               int cuotas = int.Parse(cboCuotas.Text);
+                int cuotas = int.Parse(cboCuotas.Text);
                 if (cuotas == 1)
                 {
                     pago = "Efectivo";
@@ -204,11 +253,26 @@ namespace pryRamosGimnasio
             MessageBox.Show(mensaje, "Datos del Socio", MessageBoxButtons.OK, MessageBoxIcon.Information);
             EstadoInicial();
 
+
+            //GRABA EN ARCHIVO
+            StreamWriter baseCliente = new StreamWriter("baseCliente", true);
+
+            baseCliente.WriteLine(mensaje + "\n");
+            baseCliente.WriteLine(mensaje + "-------------------------");
+            baseCliente.Close();
+
+
+            //GRABA EN ARRAY
+            arrayCliente[indiceRegistro] = mensaje;
+            indiceRegistro += 1;
+
+            
+            
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-            if (txtNombre.Text != "" && txtEdad.Text != "" && txtMeses.Text != "" && cboPlan.SelectedIndex != -1 && cboTurno.SelectedIndex != -1)
+            if (txtNombre.Text != "" && txtEdad.Text != "" && txtMeses.Text != "") //&& cboPlan.SelectedIndex != -1 && cboTurno.SelectedIndex != -1)
             {
                 btnCalcular.Enabled = true;
             }
@@ -232,18 +296,23 @@ namespace pryRamosGimnasio
                 cboCuotas.SelectedIndex = -1;
             }
         }
-    }
 
-    public struct Socio
-    {
-        public string Nombre;
-        public int Edad;
-        public string Turno;
-        public string Plan;
-        public int Meses;
-        public string Pago;
-        public bool Casillero;
-        public bool Estudiante;
-    }
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            int indiceRecorrido = 0;
 
+            while (indiceRecorrido < arrayCliente.Length)
+            {
+               lstClientes.Items.Add(arrayCliente[indiceRecorrido]);
+                indiceRecorrido += 1;
+            }
+
+            for (int indice = 0; indice < arrayCliente.Length; indice++)
+            {
+                lstClientes.Items.Add(arrayCliente[indice]);
+
+            }
+    
+        }
+    }
 }
