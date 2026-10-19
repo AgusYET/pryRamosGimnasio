@@ -1,4 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Numerics;
+using System.Text;
+using System.Windows.Forms;
+using static pryRamosGimnasio.frmInscripcion;
 
 namespace pryRamosGimnasio
 {
@@ -26,14 +35,13 @@ namespace pryRamosGimnasio
             public bool Casillero;
             public bool Estudiante;
             public decimal total;
+            public decimal Subtotal;
+            public string Categoria;
         }
-
-        //DECLARACION DE ARRAYS
-        //string[] arrayCliente;
-        //1 DIMENSION - VECTOR
-        string[] arrayCliente = new string[3];
-        //INDICE PARA EL ARRAY DE REGISTROS
-        int indiceRegistro = 0;
+       
+        
+        Socio[] arrayCliente = new Socio[100];
+        int cantidad = 0;
 
 
         public frmInscripcion()
@@ -135,7 +143,7 @@ namespace pryRamosGimnasio
             decimal precioMensual = costoPlan;
             if (casillero) precioMensual += 3000;
             {
-               decimal subTotal = precioMensual * Meses;
+               
             }
 
             switch (plan)
@@ -150,6 +158,12 @@ namespace pryRamosGimnasio
                     costoPlan = NATACION;
                     break;
             }
+
+            decimal precioTotal = costoPlan * Meses;
+            if (casillero) precioMensual += 3000;
+
+            decimal subTotal = precioMensual * Meses;
+
             switch (turno)
             {
                 case "0":
@@ -202,8 +216,10 @@ namespace pryRamosGimnasio
                 porcentajeDescuento = 0.0m;
             }
             
+            decimal descuento = subTotal * porcentajeDescuento;
+            subTotal = subTotal - descuento;
 
-            
+
 
             if (rdbEfectivo.Checked)
             {
@@ -230,7 +246,7 @@ namespace pryRamosGimnasio
 
             string textoPago = (rdbEfectivo.Checked) ? "Efectivo" : (cboCuotas.SelectedIndex != -1) ? $"Tarjeta - {cboCuotas.SelectedItem} cuotas" : "Tarjeta";
 
-            Socio socio;
+            Socio socio = new Socio();
             socio.Nombre = nombre;
             socio.Edad = Edad;
             socio.Turno = turno;
@@ -239,6 +255,9 @@ namespace pryRamosGimnasio
             socio.Pago = textoPago;
             socio.Casillero = casillero;
             socio.Estudiante = estudiante;
+            socio.total = precioTotal;
+            socio.Subtotal = subTotal;
+
 
             string mensaje = "Nombre: " + socio.Nombre + "\n" +
                              "Edad: " + socio.Edad + "\n" +
@@ -248,7 +267,16 @@ namespace pryRamosGimnasio
                              "Meses: " + socio.Meses + "\n" +
                              "Pago: " + socio.Pago + "\n" +
                              "Casillero: " + (socio.Casillero ? "Sí" : "No") + "\n" +
-                             "Estudiante: " + (socio.Estudiante ? "Sí" : "No");
+                             "Estudiante: " + (socio.Estudiante ? "Sí" : "No" ) + "\n" +
+                             "Subtotal: $" + socio.Subtotal.ToString("N2") + "\n" +
+                             "Total a pagar: $" + socio.total.ToString("N2");
+
+            lstClientes.Items.Add(mensaje);
+
+            socio.Categoria = categoria;   // antes de guardar, junto a las otras asignaciones
+            arrayCliente[cantidad] = socio;
+            cantidad++;
+
 
             MessageBox.Show(mensaje, "Datos del Socio", MessageBoxButtons.OK, MessageBoxIcon.Information);
             EstadoInicial();
@@ -260,15 +288,33 @@ namespace pryRamosGimnasio
             baseCliente.WriteLine(mensaje + "\n");
             baseCliente.WriteLine(mensaje + "-------------------------");
             baseCliente.Close();
+            
 
 
             //GRABA EN ARRAY
-            arrayCliente[indiceRegistro] = mensaje;
-            indiceRegistro += 1;
+            arrayCliente[cantidad] = socio;
+            cantidad += 1;
 
-            
-            
+            MostrarSocio(socio);
         }
+        private void MostrarSocio(Socio s)
+        {
+            string mensaje = "Nombre: " + s.Nombre + "\n" +
+                             "Edad: " + s.Edad + "\n" +
+                             "Categoría: " + s.Categoria + "\n" +
+                             "Turno: " + s.Turno + "\n" +
+                             "Plan: " + s.Plan + "\n" +
+                             "Meses: " + s.Meses + "\n" +
+                             "Pago: " + s.Pago + "\n" +
+                             "Casillero: " + (s.Casillero ? "Sí" : "No") + "\n" +
+                             "Estudiante: " + (s.Estudiante ? "Sí" : "No") + "\n" +
+                             "Subtotal: " + s.Subtotal.ToString("C") + "\n" +
+                             "Total: " + s.total.ToString("C");
+
+            MessageBox.Show(mensaje, "Datos del Socio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
@@ -299,20 +345,23 @@ namespace pryRamosGimnasio
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            int indiceRecorrido = 0;
+            MessageBox.Show(lstClientes.SelectedItems.ToString(), 
+                "Datos del Socio",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
 
-            while (indiceRecorrido < arrayCliente.Length)
+            int indice = lstClientes.SelectedIndex;
+
+            if (indice == -1)
             {
-               lstClientes.Items.Add(arrayCliente[indiceRecorrido]);
-                indiceRecorrido += 1;
+                MessageBox.Show("Seleccioná un socio de la lista.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            for (int indice = 0; indice < arrayCliente.Length; indice++)
-            {
-                lstClientes.Items.Add(arrayCliente[indice]);
+            MostrarSocio(arrayCliente[indice]);
 
-            }
-    
+
         }
     }
 }

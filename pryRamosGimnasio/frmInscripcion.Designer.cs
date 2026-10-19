@@ -57,7 +57,9 @@
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("SimSun-ExtG", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.Red;
             lblTitulo.Location = new Point(128, 9);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(202, 33);
@@ -67,7 +69,9 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.BackColor = Color.Transparent;
             lblNombre.Font = new Font("Mongolian Baiti", 11.25F, FontStyle.Bold);
+            lblNombre.ForeColor = Color.Red;
             lblNombre.Location = new Point(65, 72);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(74, 16);
@@ -77,7 +81,9 @@
             // lblEdad
             // 
             lblEdad.AutoSize = true;
+            lblEdad.BackColor = Color.Transparent;
             lblEdad.Font = new Font("Mongolian Baiti", 11.25F, FontStyle.Bold);
+            lblEdad.ForeColor = Color.Red;
             lblEdad.Location = new Point(85, 103);
             lblEdad.Name = "lblEdad";
             lblEdad.Size = new Size(53, 16);
@@ -87,7 +93,9 @@
             // lblPlanes
             // 
             lblPlanes.AutoSize = true;
+            lblPlanes.BackColor = Color.Transparent;
             lblPlanes.Font = new Font("Mongolian Baiti", 11.25F, FontStyle.Bold);
+            lblPlanes.ForeColor = Color.Red;
             lblPlanes.Location = new Point(90, 133);
             lblPlanes.Name = "lblPlanes";
             lblPlanes.Size = new Size(48, 16);
@@ -97,7 +105,9 @@
             // lblTurno
             // 
             lblTurno.AutoSize = true;
+            lblTurno.BackColor = Color.Transparent;
             lblTurno.Font = new Font("Mongolian Baiti", 11.25F, FontStyle.Bold);
+            lblTurno.ForeColor = Color.Red;
             lblTurno.Location = new Point(79, 163);
             lblTurno.Name = "lblTurno";
             lblTurno.Size = new Size(60, 16);
@@ -107,7 +117,9 @@
             // lblMeses
             // 
             lblMeses.AutoSize = true;
+            lblMeses.BackColor = Color.Transparent;
             lblMeses.Font = new Font("Mongolian Baiti", 11.25F, FontStyle.Bold);
+            lblMeses.ForeColor = Color.Red;
             lblMeses.Location = new Point(79, 196);
             lblMeses.Name = "lblMeses";
             lblMeses.Size = new Size(61, 16);
@@ -117,7 +129,9 @@
             // lblFormaDePago
             // 
             lblFormaDePago.AutoSize = true;
+            lblFormaDePago.BackColor = Color.Transparent;
             lblFormaDePago.Font = new Font("Mongolian Baiti", 11.25F, FontStyle.Bold);
+            lblFormaDePago.ForeColor = Color.Red;
             lblFormaDePago.Location = new Point(20, 302);
             lblFormaDePago.Name = "lblFormaDePago";
             lblFormaDePago.Size = new Size(131, 16);
@@ -191,13 +205,15 @@
             // chbCasillero
             // 
             chbCasillero.AutoSize = true;
+            chbCasillero.BackColor = Color.Transparent;
             chbCasillero.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chbCasillero.Location = new Point(93, 228);
+            chbCasillero.ForeColor = Color.Red;
+            chbCasillero.Location = new Point(68, 239);
             chbCasillero.Name = "chbCasillero";
             chbCasillero.Size = new Size(115, 34);
             chbCasillero.TabIndex = 7;
             chbCasillero.Text = "Casillero";
-            chbCasillero.UseVisualStyleBackColor = true;
+            chbCasillero.UseVisualStyleBackColor = false;
             // 
             // cboCuotas
             // 
@@ -210,9 +226,11 @@
             // 
             // grbFormaDePago
             // 
+            grbFormaDePago.BackColor = Color.Transparent;
             grbFormaDePago.Controls.Add(rdbTarjeta);
             grbFormaDePago.Controls.Add(cboCuotas);
             grbFormaDePago.Controls.Add(rdbEfectivo);
+            grbFormaDePago.ForeColor = Color.Red;
             grbFormaDePago.Location = new Point(147, 279);
             grbFormaDePago.Name = "grbFormaDePago";
             grbFormaDePago.Size = new Size(293, 81);
@@ -222,35 +240,39 @@
             // chkEstudiante
             // 
             chkEstudiante.AutoSize = true;
+            chkEstudiante.BackColor = Color.Transparent;
             chkEstudiante.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            chkEstudiante.ForeColor = Color.Red;
             chkEstudiante.Location = new Point(189, 96);
             chkEstudiante.Name = "chkEstudiante";
             chkEstudiante.Size = new Size(102, 24);
             chkEstudiante.TabIndex = 3;
             chkEstudiante.Text = "Estudiante";
-            chkEstudiante.UseVisualStyleBackColor = true;
+            chkEstudiante.UseVisualStyleBackColor = false;
             // 
             // btnCalcular
             // 
+            btnCalcular.BackColor = Color.White;
             btnCalcular.Enabled = false;
             btnCalcular.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnCalcular.Location = new Point(65, 399);
+            btnCalcular.Location = new Point(315, 366);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(125, 53);
             btnCalcular.TabIndex = 10;
             btnCalcular.Text = "Calcular";
-            btnCalcular.UseVisualStyleBackColor = true;
+            btnCalcular.UseVisualStyleBackColor = false;
             btnCalcular.Click += btnCalcular_Click;
             // 
             // btnLimpiar
             // 
+            btnLimpiar.BackColor = Color.White;
             btnLimpiar.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnLimpiar.Location = new Point(274, 399);
+            btnLimpiar.Location = new Point(147, 366);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(131, 53);
             btnLimpiar.TabIndex = 11;
             btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // txtMeses
@@ -265,21 +287,24 @@
             // 
             // btnConsultar
             // 
+            btnConsultar.BackColor = Color.White;
             btnConsultar.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnConsultar.Location = new Point(119, 458);
+            btnConsultar.Location = new Point(105, 529);
             btnConsultar.Name = "btnConsultar";
             btnConsultar.Size = new Size(225, 55);
             btnConsultar.TabIndex = 12;
             btnConsultar.Text = "Consultar";
-            btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.UseVisualStyleBackColor = false;
             btnConsultar.Click += btnConsultar_Click;
             // 
             // lstClientes
             // 
+            lstClientes.BackColor = Color.White;
             lstClientes.FormattingEnabled = true;
-            lstClientes.Location = new Point(-1, 519);
+            lstClientes.HorizontalScrollbar = true;
+            lstClientes.Location = new Point(3, 425);
             lstClientes.Name = "lstClientes";
-            lstClientes.Size = new Size(463, 79);
+            lstClientes.Size = new Size(463, 94);
             lstClientes.TabIndex = 13;
             // 
             // frmInscripcion
@@ -287,6 +312,7 @@
             AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.fitnet;
             ClientSize = new Size(461, 596);
             Controls.Add(lstClientes);
             Controls.Add(btnConsultar);
